@@ -29,5 +29,7 @@ namespace Halastoan_Luca_l2.Models
         // PublisherID este deja opțional (int?)
         public int? PublisherID { get; set; }
         public Publisher? Publisher { get; set; }
+
+        public ICollection<BookCategory>? BookCategories { get; set; }
     }
 }

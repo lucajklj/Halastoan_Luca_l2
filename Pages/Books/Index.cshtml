@@ -1,11 +1,11 @@
-﻿@page
+﻿@page "/"
 @model Halastoan_Luca_l2.Pages.Books.IndexModel
 
 @{
-    ViewData["Title"] = "Books";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Books</h1>
+<h1>Index</h1>
 
 <p>
     <a class="btn btn-primary" asp-page="Create">Add New Book</a>
@@ -15,22 +15,51 @@
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.book[0].Title)</th>
-            <th>@Html.DisplayNameFor(model => model.book[0].Author)</th>
+            <th>Author</th>
             <th>@Html.DisplayNameFor(model => model.book[0].Price)</th>
             <th>@Html.DisplayNameFor(model => model.book[0].PublishingDate)</th>
             <th>@Html.DisplayNameFor(model => model.book[0].Publisher.PublisherName)</th>
+            <th>@Html.DisplayNameFor(model => model.book[0].BookCategories)</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.book)
+        @foreach (var item in Model.BookD.Books)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                <td>@Html.DisplayFor(modelItem => item.Author)</td>
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            string selectedRow = "";
+            if (item.ID == Model.BookID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>@item.Title</td>
+
+          
+                <td>
+                    @if (item.Author != null)
+                    {
+                        @($"{item.Author.LastName} {item.Author.FirstName}")
+                    }
+                    else
+                    {
+                        @: -
+                    }
+                </td>
+
+                <td>@item.Price</td>
                 <td>@item.PublishingDate.ToShortDateString()</td>
                 <td>@item.Publisher?.PublisherName</td>
+
+                <td>
+                    @if (item.BookCategories != null)
+                    {
+                        foreach (var category in item.BookCategories)
+                        {
+                            @category.Category.CategoryName <br />
+                        }
+                    }
+                </td>
+
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                     <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
