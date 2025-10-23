@@ -17,5 +17,6 @@ namespace Halastoan_Luca_l2.Data
         public DbSet<Book> Book { get; set; } = default!;
         public DbSet<Publisher> Publisher { get; set; } = default!;
         public DbSet<Author> Author { get; set; } = default!;
+        public DbSet<Halastoan_Luca_l2.Models.Category> Category { get; set; } = default!;
     }
 }
