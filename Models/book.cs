@@ -13,10 +13,10 @@ namespace Halastoan_Luca_l2.Models
         [Required]
         public string Title { get; set; }
 
-        // CORECTAT: AuthorID este acum opțional (nullable) pentru a rezolva eroarea de migrare.
+    
         public int? AuthorID { get; set; }
 
-        // Proprietatea de navigație către Author
+       
         public Author? Author { get; set; }
 
         [Column(TypeName = "decimal(6,2)")]
@@ -26,7 +26,7 @@ namespace Halastoan_Luca_l2.Models
         [DataType(DataType.Date)]
         public DateTime PublishingDate { get; set; }
 
-        // PublisherID este deja opțional (int?)
+    
         public int? PublisherID { get; set; }
         public Publisher? Publisher { get; set; }
 

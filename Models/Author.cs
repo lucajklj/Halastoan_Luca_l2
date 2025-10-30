@@ -15,6 +15,15 @@ namespace Halastoan_Luca_l2.Models
         public string LastName { get; set; }
 
         // Proprietate de navigație pentru colecția de cărți scrise de acest autor
+
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
         public ICollection<Book>? Books { get; set; }
     }
 }

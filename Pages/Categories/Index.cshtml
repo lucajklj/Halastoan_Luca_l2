@@ -2,35 +2,62 @@
 @model Halastoan_Luca_l2.Pages.Categories.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Categories";
 }
 
-<h1>Index</h1>
+<h1>Categories</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Category[0].CategoryName)
-            </th>
-            <th></th>
+            <th>Category Name</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Category) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var category in Model.CategoryData.Categories)
+        {
+            <tr>
+                <td>
+                
+                    <a asp-page="./Index" asp-route-id="@category.ID">
+                        @category.CategoryName
+                    </a>
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@category.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@category.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@category.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@if (Model.CategoryData.Books != null)
+{
+    <h3>Books in this Category:</h3>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.CategoryData.Books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author?.FullName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
